@@ -2,7 +2,7 @@ name: 发布独立故障页
 on:
   push:
     branches: [main]
-    paths: [index.html, .github/workflows/pages.yml]
+    paths: [index.html, 'assets/**', .github/workflows/pages.yml]
   workflow_dispatch:
 permissions:
   contents: read
@@ -20,7 +20,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/configure-pages@v5
-      - run: mkdir site && cp index.html site/
+      - run: mkdir site && cp index.html site/ && cp -R assets site/assets
       - uses: actions/upload-pages-artifact@v4
         with:
           path: site
